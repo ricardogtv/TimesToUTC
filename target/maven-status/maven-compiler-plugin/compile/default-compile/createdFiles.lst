@@ -1,0 +1,4 @@
+com\mycompany\times\service\TimeService.class
+com\mycompany\times\controller\TimeController.class
+com\mycompany\times\TimesToUtcApplication.class
+com\mycompany\times\dto\TimeResponse.class
