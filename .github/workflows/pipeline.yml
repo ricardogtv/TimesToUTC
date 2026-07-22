@@ -38,9 +38,10 @@ jobs:
 
     - name: SonarQube Quality Gate
       uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
+      env:
+        SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
       with:
-        sonar_token: ${{ secrets.SONARQUBE_TOKEN }}
-        sonar_host_url: http://189.146.51.217:9000
+        scanMetadataReportFile: .scannerwork/report-task.txt
 
     - name: Check Quality Gate
       if: steps.qualitygate.outputs.projectStatus != 'OK'
