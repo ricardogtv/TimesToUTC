@@ -44,10 +44,14 @@ jobs:
         scanMetadataReportFile: .scannerwork/report-task.txt
 
     - name: Check Quality Gate
-      if: steps.qualitygate.outputs.projectStatus != 'OK'
+      if: always()
       run: |
-        echo "Quality Gate failed: ${{ steps.qualitygate.outputs.projectStatus }}"
-        exit 1
+        if [ "${{ steps.qualitygate.outputs.conclusion }}" != "SUCCESS" ]; then
+          echo "Quality Gate failed: ${{ steps.qualitygate.outputs.conclusion }}"
+          exit 1
+        else
+          echo "Quality Gate passed"
+        fi
 
     - name: Export SonarQube Issues
       run: |

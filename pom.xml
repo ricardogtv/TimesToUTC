@@ -27,9 +27,9 @@
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.language>java</sonar.language>
         <sonar.exclusions>
-            **/*TimesToUtcApplication.java,
+            **/com/mycompany/times/TimesToUtcApplication.java
         </sonar.exclusions>
-        <!-- <sonar.test.exclusions>**/src/test/**/*</sonar.test.exclusions> -->
+        <sonar.test.exclusions>**/*Test.java</sonar.test.exclusions>
     </properties>
 
     <dependencies>
