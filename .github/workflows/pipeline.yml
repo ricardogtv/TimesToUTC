@@ -27,10 +27,11 @@ jobs:
       run: mvn test
 
     - name: SonarQube Analysis
-      run: mvn sonar:sonar \
+      run: mvn -f pom.xml \
         -Dsonar.projectKey=TimesToUTC \
         -Dsonar.host.url=http://189.146.51.217:9000 \
-        -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }} -f pom.xml
+        -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }} \
+        sonar:sonar
 
     - name: SonarQube Quality Gate
       id: qualitygate
