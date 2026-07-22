@@ -1,0 +1,29 @@
+name: Claude SonarQube Suggestions
+
+on:
+  workflow_run:
+    workflows: ["Java CI with Maven + SonarQube"]
+    types:
+      - completed
+
+jobs:
+  claude-sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download SonarQube Issues
+        uses: actions/download-artifact@v4
+        with:
+          name: sonar-issues
+          path: .
+
+      - name: Run Claude Suggestions
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            The following SonarQube issues were detected in the Java 17 Spring Boot project:
+            $(cat sonar-issues.json)
+
+            Please analyze these issues and suggest fixes, refactors, or improvements.
+            Provide actionable recommendations for bugs, vulnerabilities, and code smells.
