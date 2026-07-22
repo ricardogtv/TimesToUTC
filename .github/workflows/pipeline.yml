@@ -28,9 +28,9 @@ jobs:
 
     - name: SonarQube Analysis
       run: mvn sonar:sonar \
-        -Dsonar.projectKey=my-java-project \
+        -Dsonar.projectKey=TimesToUTC \
         -Dsonar.host.url=http://189.146.51.217/:9000 \
-        -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
+        -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }} -f pom.xml
 
     - name: SonarQube Quality Gate
       id: qualitygate
