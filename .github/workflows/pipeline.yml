@@ -21,7 +21,7 @@ jobs:
         cache: maven
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn clean install
 
     - name: Run Tests
       run: mvn test
@@ -33,7 +33,8 @@ jobs:
         args: >
           -Dsonar.projectKey=TimesToUTC
           -Dsonar.host.url=http://189.146.51.217:9000
-          -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
+          -Dsonar.token=${{ secrets.SONARQUBE_TOKEN }}
+          -Dsonar.java.binaries=target/classes
 
     - name: SonarQube Quality Gate
       uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
