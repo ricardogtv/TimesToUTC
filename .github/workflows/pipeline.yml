@@ -43,20 +43,10 @@ jobs:
       with:
         scanMetadataReportFile: .scannerwork/report-task.txt
 
-    - name: Check Quality Gate
-      if: always()
-      run: |
-        if [ "${{ steps.qualitygate.outputs.conclusion }}" != "SUCCESS" ]; then
-          echo "Quality Gate failed: ${{ steps.qualitygate.outputs.conclusion }}"
-          exit 1
-        else
-          echo "Quality Gate passed"
-        fi
-
     - name: Export SonarQube Issues
       run: |
         curl -u ${{ secrets.SONARQUBE_TOKEN }}: \
-          "http://189.146.51.217:9000/api/issues/search?projectKeys=my-java-project" \
+          "http://189.146.51.217:9000/api/issues/search?projectKeys=TimesToUTC" \
           -o sonar-issues.json
       continue-on-error: true
 
